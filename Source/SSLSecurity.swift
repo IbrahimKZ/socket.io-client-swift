@@ -177,7 +177,8 @@ open class SSLSecurity : SSLTrustValidator {
                         }
                     }
                 }
-                if trustedCount == serverCerts.count {
+                if trustedCount > 0 {
+                //if trustedCount == serverCerts.count {
                     return true
                 }
             }
