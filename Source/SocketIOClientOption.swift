@@ -88,7 +88,7 @@ public enum SocketIOClientOption : ClientOption {
     case secure(Bool)
 
     /// Allows you to set which certs are valid. Useful for SSL pinning.
-    case security(SSLSecurity)
+    case security(SSLSecurityCustom)
 
     /// If you're using a self-signed set. Only use for development.
     case selfSigned(Bool)

@@ -75,7 +75,7 @@ extension NSDictionary {
             return .reconnectWait(wait)
         case let ("secure", secure as Bool):
             return .secure(secure)
-        case let ("security", security as SSLSecurity):
+        case let ("security", security as SSLSecurityCustom):
             return .security(security)
         case let ("selfSigned", selfSigned as Bool):
             return .selfSigned(selfSigned)

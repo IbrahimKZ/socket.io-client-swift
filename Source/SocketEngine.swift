@@ -133,7 +133,7 @@ public final class SocketEngine : NSObject, URLSessionDelegate, SocketEnginePoll
     private var pongsMissedMax = 0
     private var probeWait = ProbeWaitQueue()
     private var secure = false
-    private var security: SSLSecurity?
+    private var security: SSLSecurityCustom?
     private var selfSigned = false
 
     // MARK: Initializers
