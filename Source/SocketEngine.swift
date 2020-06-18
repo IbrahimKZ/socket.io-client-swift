@@ -222,7 +222,7 @@ public final class SocketEngine : NSObject, URLSessionDelegate, SocketEnginePoll
 
     private func handleBase64(message: String) {
         // binary in base64 string
-        let noPrefix = message[message.index(message.startIndex, offsetBy: 2)..<message.endIndex]
+        let noPrefix = String(message[message.index(message.startIndex, offsetBy: 2)..<message.endIndex])
 
         if let data = Data(base64Encoded: noPrefix, options: .ignoreUnknownCharacters) {
             client?.parseEngineBinaryData(data)
@@ -525,13 +525,13 @@ public final class SocketEngine : NSObject, URLSessionDelegate, SocketEnginePoll
 
         switch type {
         case .message:
-            handleMessage(String(message.characters.dropFirst()))
+            handleMessage(String(message.dropFirst()))
         case .noop:
             handleNOOP()
         case .pong:
             handlePong(with: message)
         case .open:
-            handleOpen(openData: String(message.characters.dropFirst()))
+            handleOpen(openData: String(message.dropFirst()))
         case .close:
             handleClose(message)
         default:
