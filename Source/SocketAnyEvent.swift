@@ -25,14 +25,14 @@
 import Foundation
 
 /// Represents some event that was received.
-public final class SocketAnyEvent : NSObject {
+@objc public final class SocketAnyEvent : NSObject {
     // MARK: Properties
 
     /// The event name.
-    public let event: String
+    @objc public let event: String
 
     /// The data items for this event.
-    public let items: [Any]?
+    @objc public let items: [Any]?
 
     /// The description of this event.
     override public var description: String {

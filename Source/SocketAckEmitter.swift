@@ -28,7 +28,7 @@ import Foundation
 /// A class that represents a waiting ack call.
 ///
 /// **NOTE**: You should not store this beyond the life of the event handler.
-public final class SocketAckEmitter : NSObject {
+@objc public final class SocketAckEmitter : NSObject {
     let socket: SocketIOClient
     let ackNum: Int
 
@@ -65,7 +65,7 @@ public final class SocketAckEmitter : NSObject {
     /// Call to ack receiving this event.
     ///
     /// - parameter items: An array of items to send when acking. Use `[]` to send nothing.
-    public func with(_ items: [Any]) {
+    @objc public func with(_ items: [Any]) {
         guard ackNum != -1 else { return }
 
         socket.emitAck(ackNum, with: items)

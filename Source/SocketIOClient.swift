@@ -30,14 +30,14 @@ import Foundation
 /// **NOTE**: The client is not thread/queue safe, all interaction with the socket should be done on the `handleQueue`
 ///
 /// Represents a socket.io-client. Most interaction with socket.io will be through this class.
-open class SocketIOClient : NSObject, SocketIOClientSpec, SocketEngineClient, SocketParsable {
+@objc open class SocketIOClient : NSObject, SocketIOClientSpec, SocketEngineClient, SocketParsable {
     // MARK: Properties
 
     /// The engine for this client.
     public private(set) var engine: SocketEngineSpec?
 
     /// The status of this client.
-    public private(set) var status = SocketIOClientStatus.notConnected {
+    @objc public private(set) var status = SocketIOClientStatus.notConnected {
         didSet {
             switch status {
             case .connected:
@@ -160,7 +160,7 @@ open class SocketIOClient : NSObject, SocketIOClientSpec, SocketEngineClient, So
     }
 
     /// Connect to the server.
-    open func connect() {
+    @objc open func connect() {
         connect(timeoutAfter: 0, withHandler: nil)
     }
 
@@ -225,7 +225,7 @@ open class SocketIOClient : NSObject, SocketIOClientSpec, SocketEngineClient, So
     }
 
     /// Disconnects the socket.
-    open func disconnect() {
+    @objc open func disconnect() {
         DefaultSocketLogger.Logger.log("Closing socket", type: logType)
 
         didDisconnect(reason: "Disconnect")
@@ -253,7 +253,7 @@ open class SocketIOClient : NSObject, SocketIOClientSpec, SocketEngineClient, So
     ///
     /// - parameter event: The event to send.
     /// - parameter with: The items to send with this event. May be left out.
-    open func emit(_ event: String, with items: [Any]) {
+    @objc open func emit(_ event: String, with items: [Any]) {
         guard status == .connected else {
             handleClientEvent(.error, data: ["Tried emitting \(event) when not connected"])
             return
@@ -467,7 +467,7 @@ open class SocketIOClient : NSObject, SocketIOClientSpec, SocketEngineClient, So
     /// - parameter callback: The callback that will execute when this event is received.
     /// - returns: A unique id for the handler that can be used to remove it.
     @discardableResult
-    open func on(_ event: String, callback: @escaping NormalCallback) -> UUID {
+    @objc open func on(_ event: String, callback: @escaping NormalCallback) -> UUID {
         DefaultSocketLogger.Logger.log("Adding handler for event: %@", type: logType, args: event)
 
         let handler = SocketEventHandler(event: event, id: UUID(), callback: callback)
@@ -524,7 +524,7 @@ open class SocketIOClient : NSObject, SocketIOClientSpec, SocketEngineClient, So
     /// Adds a handler that will be called on every event.
     ///
     /// - parameter handler: The callback that will execute whenever an event is received.
-    open func onAny(_ handler: @escaping (SocketAnyEvent) -> ()) {
+    @objc open func onAny(_ handler: @escaping (SocketAnyEvent) -> ()) {
         anyHandler = handler
     }
 
